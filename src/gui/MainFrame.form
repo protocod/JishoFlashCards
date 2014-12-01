@@ -96,9 +96,9 @@
                                               </Group>
                                           </Group>
                                           <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="endLabel" min="-2" max="-2" attributes="0"/>
-                                              <Component id="transTextField" min="-2" pref="181" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="transTextField" max="32767" attributes="0"/>
+                                              <Component id="endLabel" pref="181" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -167,7 +167,7 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane4" pref="177" max="32767" attributes="0"/>
+                      <Component id="jScrollPane4" pref="174" max="32767" attributes="0"/>
                       <Component id="jScrollPane2" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -312,6 +312,10 @@
         </Component>
         <Component class="javax.swing.JLabel" name="endLabel">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="1"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="&#x422;&#x435;&#x441;&#x442;&#x44a;&#x442; &#x43f;&#x440;&#x438;&#x43a;&#x43b;&#x44e;&#x447;&#x438;!"/>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>

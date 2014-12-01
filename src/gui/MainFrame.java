@@ -73,29 +73,30 @@ public class MainFrame extends javax.swing.JFrame {
     private void checkWord()
     {
         boolean result;
-        String translation = words.get(examWords.get(randomIndex));
+        String correctTranslation = words.get(examWords.get(randomIndex));
+        String userTranslation = transTextField.getText().trim();
         
-        if(translation.contains("("))
+        if(correctTranslation.contains("("))
         {
-            if(translation.indexOf("(") == 0)
+            if(correctTranslation.indexOf("(") == 0)
             {
-            translation = translation.substring(0, translation.indexOf(")"));
+                correctTranslation = correctTranslation.substring(correctTranslation.indexOf(")") + 1);
             }
             else
             {
-                translation = translation.substring(0, translation.indexOf("(") - 1);
+                correctTranslation = correctTranslation.substring(0, correctTranslation.indexOf("(") - 1);
             }
         }
       
-        if((translation.contains(",")) || (translation.contains(";")))
+        if(correctTranslation.contains(";"))
         {
             result = false;
-            translation = translation.replace(",", ";");
-            String[] multiWords = translation.split(";");
+            correctTranslation = correctTranslation.replace(",", ";");
+            String[] multiWords = correctTranslation.split(";");
             
             for(String multiWord : multiWords)
             {
-                if(multiWord.trim().equalsIgnoreCase(transTextField.getText()))
+                if(multiWord.trim().equalsIgnoreCase(userTranslation))
                 {
                     result = true;
                     break;
@@ -104,7 +105,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
         else
         {
-            result = translation.equalsIgnoreCase(transTextField.getText());
+            result = correctTranslation.trim().equalsIgnoreCase(userTranslation);
         }
         
         String currentWord = examWords.get(randomIndex);
@@ -134,7 +135,7 @@ public class MainFrame extends javax.swing.JFrame {
             wrongWordsNum++;
             wrongLabel.setText(wrongWordsNum.toString());
             showTextField.setForeground(Color.red);
-            showTextField.setText(currentTranslation);
+            showTextField.setText(currentWord + " - " + currentTranslation + "\n");
             
             wrongWords.put(currentWord, currentTranslation);
             wrongWordsArea.append(currentWord + " - " + currentTranslation + "\n");
@@ -273,6 +274,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Jisho Flash Cards");
+        setForeground(java.awt.Color.white);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -324,6 +326,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel3.setText("Превод:");
 
+        showTextField.setEditable(false);
         showTextField.setColumns(20);
         showTextField.setLineWrap(true);
         showTextField.setRows(5);
@@ -332,6 +335,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel7.setText("Сгрешени/непознати думи:");
 
+        wrongWordsArea.setEditable(false);
         wrongWordsArea.setColumns(20);
         wrongWordsArea.setLineWrap(true);
         wrongWordsArea.setRows(5);
@@ -370,38 +374,36 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(jScrollPane4))
                     .addComponent(wordTextField)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(203, 203, 203)
+                        .addComponent(jLabel7)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(203, 203, 203)
-                                .addComponent(jLabel7))
+                            .addComponent(jLabel2)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel1)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(totLabel)
-                                                    .addComponent(jLabel4)
-                                                    .addComponent(jLabel5))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(correctLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 14, Short.MAX_VALUE)
-                                                    .addComponent(totalWordsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(wrongLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                                        .addGap(26, 26, 26)
+                                            .addComponent(totLabel)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel5))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(transTextField)
-                                            .addComponent(endLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE))))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(showTranslationBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(checkWordBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(repeatButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(repeatWrongButton, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                            .addComponent(correctLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 14, Short.MAX_VALUE)
+                                            .addComponent(totalWordsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(wrongLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(26, 26, 26)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(endLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(transTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(showTranslationBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(checkWordBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(repeatButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(repeatWrongButton, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -504,8 +506,8 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

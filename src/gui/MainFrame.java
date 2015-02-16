@@ -84,7 +84,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
             else
             {
-                correctTranslation = correctTranslation.substring(0, correctTranslation.indexOf("(") - 1);
+                correctTranslation = correctTranslation.substring(0, correctTranslation.indexOf("("));
             }
         }
       

@@ -536,6 +536,7 @@ public class MainFrame extends javax.swing.JFrame {
             showTextField.setText(words.get(examWords.get(randomIndex)));
             translationShown = true;
         }
+        transTextField.grabFocus();
     }//GEN-LAST:event_showTranslationBtnActionPerformed
 
     private void checkWordBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkWordBtnActionPerformed
@@ -543,6 +544,7 @@ public class MainFrame extends javax.swing.JFrame {
         {
             checkWord();
         }
+        transTextField.grabFocus();
     }//GEN-LAST:event_checkWordBtnActionPerformed
 
     private void transTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_transTextFieldKeyPressed
@@ -555,6 +557,7 @@ public class MainFrame extends javax.swing.JFrame {
         {
             checkWord();
         }
+        transTextField.grabFocus();
     }//GEN-LAST:event_transTextFieldActionPerformed
 
     private void fileListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_fileListValueChanged
@@ -570,6 +573,7 @@ public class MainFrame extends javax.swing.JFrame {
         {
             loadFile((Path)fileList.getSelectedValue());
         }
+        transTextField.grabFocus();
     }//GEN-LAST:event_repeatButtonActionPerformed
 
     private void repeatWrongButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_repeatWrongButtonActionPerformed
@@ -594,6 +598,7 @@ public class MainFrame extends javax.swing.JFrame {
         wrongWordsNum = 0;
         wrongLabel.setText(wrongWordsNum.toString()); 
         getWord();
+        transTextField.grabFocus();
     }//GEN-LAST:event_repeatWrongButtonActionPerformed
 
     /**
